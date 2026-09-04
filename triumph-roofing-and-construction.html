@@ -11,8 +11,10 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdro
 .logo{font-weight:800;font-size:1.35rem;letter-spacing:-.02em}.logo b{color:var(--ac)}
 .nav a{color:#475569;font-weight:600;margin:0 14px}
 .call{background:var(--ac);color:#fff;padding:12px 22px;border-radius:10px;font-weight:700;box-shadow:0 6px 18px #b91c1c44}
-.hero{position:relative;padding:8vw 6vw;min-height:82vh;display:flex;align-items:center;color:#fff;background:linear-gradient(90deg,rgba(9,13,20,.86),rgba(9,13,20,.45)),url('https://loremflickr.com/1600/1000/roofer,house') center/cover}
-.hero .in{max-width:660px}
+.hero{position:relative;padding:8vw 6vw;min-height:86vh;display:flex;align-items:center;color:#fff;background:#0b1220;overflow:hidden}
+.hero .bg{position:absolute;inset:0;background-image:url('https://loremflickr.com/1600/1000/roofer,house');background-size:cover;background-position:center;background-repeat:no-repeat;z-index:0}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,13,20,.82),rgba(9,13,20,.35))}
+.hero .in{max-width:660px;position:relative;z-index:2}
 .badge{display:inline-block;background:#ffffff22;border:1px solid #ffffff33;padding:7px 15px;border-radius:100px;font-weight:600;font-size:.9rem;margin-bottom:20px}
 .hero h1{font-size:3.4rem;line-height:1.08;letter-spacing:-.03em;margin-bottom:18px;font-weight:800}
 .hero .lead{font-size:1.25rem;opacity:.94;margin-bottom:30px}
@@ -46,7 +48,7 @@ footer{background:#0b1220;color:#94a3b8;padding:40px 6vw;text-align:center}foote
 <header><div class="logo">Dallas Roofing<b>.</b></div>
 <nav class="nav"><a href="#services">Services</a><a href="#work">Work</a><a href="#reviews">Reviews</a></nav>
 <a class="call" href="tel:+19723321766">📞 +19723321766</a></header>
-<div class="hero"><div class="in"><span class="badge">★★★★★ Trusted by Dallas homeowners</span>
+<div class="hero"><div class="bg"></div><div class="in"><span class="badge">★★★★★ Trusted by Dallas homeowners</span>
 <h1>Roofing Done Right in Dallas</h1>
 <p class="lead">Triumph Roofing and Construction delivers craftsmanship you can count on — honest pricing, clean work, and a finish that lasts. Free estimates, always.</p>
 <div class="cta"><a class="p1" href="tel:+19723321766">Call +19723321766</a><a class="p2" href="#quote">Get a Free Quote →</a></div></div></div>
