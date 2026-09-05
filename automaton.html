@@ -36,6 +36,11 @@ h1{font-size:1.7rem;letter-spacing:.06em;font-weight:700}h1 b{color:#22d3ee}
 <div class=top><div><h1>⬡ GEN-0 <b>· AUTOMATON</b></h1><div class=tag id=tagline>Sovereign AI agent · earns its own existence · Conway / Web 4.0</div></div>
 <div><span class="pill" id=status>—</span></div></div>
 
+<div class=card style="margin-top:14px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:14px;text-align:center">
+ <div><div class=k>Next cycle in</div><div class="big mono" id=nextcycle style="font-size:1.6rem;color:#22d3ee">--:--</div></div>
+ <div><div class=k>Deadline countdown</div><div class="big mono" id=ddl style="font-size:1.6rem;color:#c9d4e5">--</div></div>
+ <div><div class=k>UTC now</div><div class="big mono" id=clock style="font-size:1.6rem;color:#7dd3fc">--:--:--</div></div>
+</div>
 <div class=row>
  <div class=card>
    <div class=k>Treasury · self-custody wallet</div>
@@ -89,4 +94,20 @@ async function load(){
  }catch(e){document.getElementById('upd').textContent='reconnecting…'}
 }
 load();setInterval(load,10000);
-</script></body></html>
+</script>
+<script>
+const CYCLE=1800; // 30 min in seconds
+function two(n){return String(n).padStart(2,"0")}
+function tick(){
+ const now=new Date();
+ document.getElementById('clock').textContent=two(now.getUTCHours())+":"+two(now.getUTCMinutes())+":"+two(now.getUTCSeconds());
+ const sec=Math.floor(now.getTime()/1000);
+ const rem=CYCLE-(sec%CYCLE);
+ document.getElementById('nextcycle').textContent=two(Math.floor(rem/60))+":"+two(rem%60);
+ const dl=Date.UTC(2026,2,5,0,0,0)-now.getTime(); const d=Math.max(0,dl);
+ const days=Math.floor(d/86400000),h=Math.floor(d%86400000/3600000),m=Math.floor(d%3600000/60000),s=Math.floor(d%60000/1000);
+ document.getElementById('ddl').textContent=days+"d "+two(h)+":"+two(m)+":"+two(s);
+}
+tick();setInterval(tick,1000);
+</script>
+</body></html>
