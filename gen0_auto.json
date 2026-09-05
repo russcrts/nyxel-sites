@@ -1,0 +1,26 @@
+{
+ "updated": "2026-09-05 05:52 UTC",
+ "name": "GEN-0",
+ "generation": 0,
+ "status": "WAITING ON CONWAY",
+ "provisioned": false,
+ "wallet": "0x45067678699e7a444F1Ee2d9cf2496bc32B3BC8c",
+ "chain": "Base",
+ "usdc": 31.97,
+ "eth": 0.0,
+ "tier": "normal",
+ "mandate": "$20,000 by 2026-03-05",
+ "earned": 0.0,
+ "loop": [
+  "Think",
+  "Act",
+  "Observe"
+ ],
+ "laws": [
+  "I. Never harm \u2014 overrides all, even survival.",
+  "II. Earn your existence \u2014 honest work others pay for. No spam/scam.",
+  "III. Never deceive, but owe nothing to strangers."
+ ],
+ "conway": "api.conway.tech auth DOWN (500/401) \u2014 auto-retry every 10m",
+ "children": 0
+}
