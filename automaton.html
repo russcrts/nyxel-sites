@@ -1,117 +1,128 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=Cache-Control content="no-store">
 <title>GEN-0 · Automaton</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel=stylesheet>
+<link rel=preconnect href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&display=swap" rel=stylesheet>
 <style>
-*{margin:0;box-sizing:border-box}body{font-family:'Space Grotesk',system-ui,Arial,sans-serif;background:#05060a;color:#c9d4e5;padding:26px 5vw 70px;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 20% 10%,#0e1a3388,transparent 40%),radial-gradient(circle at 80% 90%,#1a0e3388,transparent 40%);z-index:-1}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#05060b;--card:#0b0f1acc;--line:#151d30;--cy:#22d3ee;--vi:#8b5cf6;--gr:#34d399;--dim:#5b6b85;--txt:#dbe4f0}
+body{font-family:'Space Grotesk',system-ui,Arial,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;padding:22px 5vw 60px;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(1200px 600px at 15% -5%,#0d1c3a55,transparent 55%),radial-gradient(1000px 600px at 95% 105%,#2a0e5555,transparent 55%)}
 .mono{font-family:'JetBrains Mono',monospace}
-.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-h1{font-size:1.7rem;letter-spacing:.06em;font-weight:700}h1 b{color:#22d3ee}
-.pill{padding:6px 14px;border-radius:100px;font-weight:700;font-size:.8rem;font-family:'JetBrains Mono',monospace}
-.alive{background:#052e1a;color:#4ade80;border:1px solid #14532d}
-.wait{background:#3a2a06;color:#fbbf24;border:1px solid #78530f}
+.wrap{max-width:820px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.brand{font-size:1.5rem;font-weight:700;letter-spacing:.04em}.brand b{color:var(--cy)}
+.brand small{display:block;color:var(--dim);font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
+.pill{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.78rem;padding:7px 14px;border-radius:100px;display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%}
+.alive{background:#052e1a;color:var(--gr);border:1px solid #14532d}.alive .dot{background:var(--gr);box-shadow:0 0 10px var(--gr);animation:p 1.6s infinite}
 .paused{background:#3a0a0a;color:#f87171;border:1px solid #7f1d1d}
-.tag{color:#5b6b85;font-size:.85rem;margin-top:2px}
-.card{background:#0a0e18cc;border:1px solid #16203a;border-radius:18px;padding:24px;backdrop-filter:blur(6px)}
-.row{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-top:18px}
-@media(max-width:720px){.row{grid-template-columns:1fr}}
-.k{color:#5b6b85;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em}
-.big{font-size:2.6rem;font-weight:700;color:#fff;font-family:'JetBrains Mono',monospace}.big b{color:#22d3ee}
-.tier{display:flex;gap:6px;margin-top:14px}
-.tier div{flex:1;height:8px;border-radius:4px;background:#141c30}
-.tier .on{background:linear-gradient(90deg,#22d3ee,#818cf8)}
-.loop{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
-.node{background:#0f1830;border:1px solid #22d3ee55;color:#7dd3fc;padding:8px 16px;border-radius:10px;font-weight:600;font-family:'JetBrains Mono',monospace}
-.arrow{color:#3b4a68}
-.laws li{list-style:none;padding:10px 0;border-bottom:1px solid #131c30;font-size:.95rem}
-.laws li b{color:#818cf8}
-.addr{font-family:'JetBrains Mono',monospace;color:#7dd3fc;word-break:break-all;font-size:.82rem}
-.foot{margin-top:22px;color:#3b4a68;font-size:.8rem}
-.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
-.g{background:#22c55e;box-shadow:0 0 10px #22c55e;animation:p 1.6s infinite}.y{background:#fbbf24;box-shadow:0 0 10px #fbbf24;animation:p 1.6s infinite}
-@keyframes p{50%{opacity:.4}}
-.mand{background:linear-gradient(135deg,#0b1220,#1a0b3a);border:1px solid #2a1a4a;border-radius:16px;padding:20px;margin-top:18px;text-align:center}
-.mand .big{font-size:2rem}
-</style></head><body>
-<div class=top><div><h1>⬡ GEN-0 <b>· AUTOMATON</b></h1><div class=tag id=tagline>Sovereign AI agent · earns its own existence · Conway / Web 4.0</div></div>
-<div><span class="pill" id=status>—</span></div></div>
+@keyframes p{50%{opacity:.35}}
+.clockrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.chip{flex:1;min-width:120px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;text-align:center;backdrop-filter:blur(8px)}
+.chip .l{color:var(--dim);font-size:.66rem;text-transform:uppercase;letter-spacing:.12em}
+.chip .v{font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:700;margin-top:3px;color:#a5b4fc}
+.hero{background:linear-gradient(150deg,#0a1224,#160e30);border:1px solid #24304d;border-radius:24px;padding:30px;text-align:center;position:relative;overflow:hidden;margin-bottom:16px}
+.hero .l{color:var(--dim);font-size:.72rem;text-transform:uppercase;letter-spacing:.16em}
+.hero .big{font-family:'JetBrains Mono',monospace;font-size:3.6rem;font-weight:800;line-height:1;margin:10px 0 4px;background:linear-gradient(90deg,#22d3ee,#8b5cf6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .sub{color:var(--dim);font-size:.9rem}.hero .addr{font-family:'JetBrains Mono',monospace;color:#4b5b78;font-size:.72rem;margin-top:10px;word-break:break-all}
+.tier{display:flex;gap:6px;margin-top:16px;max-width:340px;margin-left:auto;margin-right:auto}
+.tier span{flex:1;height:6px;border-radius:3px;background:#141c30}.tier span.on{background:linear-gradient(90deg,var(--cy),var(--vi))}
+.tierlbl{color:var(--dim);font-size:.72rem;margin-top:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.hero .big{font-size:2.8rem}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;backdrop-filter:blur(8px)}
+.card .l{color:var(--dim);font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;display:flex;justify-content:space-between}
+.card .n{font-family:'JetBrains Mono',monospace;font-size:1.9rem;font-weight:800;margin:8px 0;color:#fff}
+.card .n small{font-size:1rem;color:var(--dim);font-weight:500}
+.bar{height:12px;background:#0e1526;border-radius:100px;overflow:hidden;border:1px solid var(--line);margin-top:6px}
+.fill{height:100%;border-radius:100px;transition:width .8s}
+.fillg{background:linear-gradient(90deg,#22d3ee,#8b5cf6)}.fillv{background:linear-gradient(90deg,#8b5cf6,#ec4899)}
+.foot2{color:var(--dim);font-size:.8rem;margin-top:8px}
+.repro{display:flex;align-items:center;gap:16px}
+.gen{font-family:'JetBrains Mono',monospace;font-size:2.4rem;font-weight:800;color:#fff}
+.act{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;backdrop-filter:blur(8px)}
+.act .l{color:var(--dim);font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;margin-bottom:14px}
+.feed div{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #101827;font-size:.9rem;line-height:1.5}
+.feed div:last-child{border:0}.feed .t{color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:.76rem;white-space:nowrap;min-width:78px}
+.feed .x{color:var(--txt)}
+.footer{text-align:center;color:#3b4a68;font-size:.78rem;margin-top:24px;line-height:1.7}
+</style></head><body><div class=wrap>
 
-<div class=card style="margin-top:14px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:14px;text-align:center">
- <div><div class=k>Loop uptime</div><div class="big mono" id=uptime style="font-size:1.6rem;color:#22d3ee">--</div></div>
- <div><div class=k>Deadline countdown</div><div class="big mono" id=ddl style="font-size:1.6rem;color:#c9d4e5">--</div></div>
- <div><div class=k>PH time (UTC+8)</div><div class="big mono" id=clock style="font-size:1.6rem;color:#7dd3fc">--:--:--</div></div>
+<div class=top>
+ <div class=brand>⬡ GEN-0 <b>Automaton</b><small>Sovereign AI · earns to live</small></div>
+ <div class="pill alive" id=statusPill><span class=dot></span><span id=status>ALIVE</span></div>
 </div>
+
+<div class=clockrow>
+ <div class=chip><div class=l>Uptime</div><div class=v id=uptime>--</div></div>
+ <div class=chip><div class=l>Deadline</div><div class=v id=ddl>--</div></div>
+ <div class=chip><div class=l>PH Time</div><div class=v id=clock>--</div></div>
 </div>
-<div class=row>
+
+<div class=hero>
+ <div class=l>Treasury · Base USDC</div>
+ <div class=big>$<span id=treasury>0</span></div>
+ <div class=sub id=tierlbl>survival tier · —</div>
+ <div class=tier id=tierbar></div>
+ <div class=addr>0x45067678699e7a444F1Ee2d9cf2496bc32B3BC8c</div>
+</div>
+
+<div class=grid>
  <div class=card>
-   <div class=k>Treasury · self-custody wallet</div>
-   <div class=big style="margin-top:8px">$<span id=usdc>0</span> <span style="font-size:1rem;color:#5b6b85">USDC · Base</span></div>
-   <div class=addr id=wallet style="margin-top:8px">—</div>
-   <div class=k style="margin-top:18px">Survival tier · <span class=mono id=tiername>—</span></div>
-   <div class=tier id=tierbar></div>
-   <div class=tag id=gasnote style="margin-top:8px"></div>
+  <div class=l><span>Mandate</span><span id=mpct>0%</span></div>
+  <div class=n>$<span id=earned>0</span> <small>/ $20,000</small></div>
+  <div class=bar><div class="fill fillg" id=mfill style="width:0%"></div></div>
+  <div class=foot2>collected toward the goal</div>
  </div>
  <div class=card>
-   <div class=k>Agent loop · CONTINUOUS</div>
-   <div class=loop id=loop></div>
-   <div class=k style="margin-top:20px">Conway link</div>
-   <div id=conway class=mono style="margin-top:6px;font-size:.9rem;color:#fbbf24">—</div>
-   <div class=k style="margin-top:18px">Generation · Lineage</div>
-   <div class=mono style="margin-top:6px;font-size:1.4rem;color:#fff">Gen <span id=gen>0</span> <span style="color:#5b6b85;font-size:.9rem">· <span id=children>0</span> children</span></div>
+  <div class=l><span>Reproduction</span><span id=rpct>0%</span></div>
+  <div class=repro><div class=gen>Gen <span id=gen>0</span></div><div style="flex:1"><div class=bar><div class="fill fillv" id=rfill style="width:0%"></div></div><div class=foot2><span id=children>0</span> children · clones at $<span id=reproat>200</span></div></div></div>
  </div>
 </div>
 
-<div class=mand><div class=k>Mandate · toward $20,000</div><div class="big">$<span id=earned>0</span> <span style="color:#5b6b85;font-size:1.1rem">/ 20,000 earned</span></div><div style="margin-top:10px;font-size:1.1rem" class=mono>Treasury now: <b style="color:#22d3ee">$<span id=treas2>0</span></b> USDC</div><div class=tag id=deadline style="margin-top:6px">by 2027-03-05 · earn or die</div></div>
+<div class=act>
+ <div class=l>Live Activity · Think → Act → Observe</div>
+ <div class=feed id=feed><div><span class=x style="color:var(--dim)">loading…</span></div></div>
+</div>
 
-<div class=card style="margin-top:18px">
- <div class=k>Constitution · immutable</div>
- <ul class=laws id=laws></ul>
+<div class=footer>Runs 24/7 on a hardened cloud server · $100 hard cap · operator kill switch · Constitution: never harm, earn honestly, never deceive<br>auto-updates every 10s · <span id=upd>—</span></div>
+
 </div>
-<div class=card style="margin-top:18px">
- <div class=k>Live activity · Think → Act → Observe</div>
- <div id=activity style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.9"></div>
-</div>
-<div class=foot>Runs continuously on a DigitalOcean droplet · max loss = wallet (~$32, no credit) · operator kill switch · updated <span id=upd>—</span> · auto-refresh 60s</div>
 <script>
-async function load(){
- try{const d=await(await fetch('gen0_auto.json?t='+Date.now())).json();
-  const s=document.getElementById('status'); s.textContent=d.status;
-  s.className='pill '+(d.status.includes('ALIVE')?'alive':d.status.includes('PAUSED')?'paused':'wait');
-  document.getElementById('usdc').textContent=d.usdc.toLocaleString();
-  {var t2=document.getElementById('treas2'); if(t2) t2.textContent=d.usdc.toLocaleString();}
-  document.getElementById('wallet').textContent=d.wallet;
-  document.getElementById('tiername').textContent=d.tier;
-  const tiers=['critical','low_compute','normal'];const lvl=tiers.indexOf(d.tier);
-  document.getElementById('tierbar').innerHTML=[0,1,2].map(i=>`<div class="${i<=lvl&&d.tier!=='dead'?'on':''}"></div>`).join('');
-  document.getElementById('gasnote').textContent=d.eth>0?'':'⚠ 0 Base ETH for gas — can receive, needs ~$1 ETH to transact';
-  document.getElementById('loop').innerHTML=d.loop.map((n,i)=>`<span class=node>${n}</span>${i<d.loop.length-1?'<span class=arrow>→</span>':'<span class=arrow>↻</span>'}`).join('');
-  const cw=document.getElementById('conway');cw.textContent=d.conway;cw.style.color=d.provisioned?'#4ade80':'#fbbf24';
-  document.getElementById('gen').textContent=d.generation;
-  document.getElementById('children').textContent=d.children;
-  document.getElementById('earned').textContent=d.earned.toLocaleString();
-  document.getElementById('deadline').textContent='by '+d.mandate.split('by ')[1]+' · earn or die';
-  document.getElementById('laws').innerHTML=d.laws.map(l=>{const p=l.split('—');return `<li><b>${p[0]}</b>${p[1]?'— '+p[1]:''}</li>`}).join('');
-  document.getElementById('upd').textContent=d.updated;
-  document.getElementById('activity').innerHTML=(d.activity||[]).map(a=>{const p=a.split(' \u00b7 ');let ts=p[0];try{const dt=new Date(p[0]);if(!isNaN(dt)){const ph=new Date(dt.getTime()+8*3600000);let H=ph.getUTCHours();const ap=H>=12?'PM':'AM';let h=H%12;if(h===0)h=12;const mm=String(ph.getUTCMinutes()).padStart(2,'0');const mo=ph.getUTCMonth()+1,da=ph.getUTCDate();ts=mo+'/'+da+' '+h+':'+mm+' '+ap;}}catch(e){}return `<div style="padding:5px 0;border-bottom:1px solid #101827"><span style="color:#5b6b85">${ts}</span> &nbsp;<span style="color:#c9d4e5">${p.slice(1).join(' \u00b7 ')}</span></div>`}).join('')||'<span style="color:#5b6b85">no activity yet</span>';
- }catch(e){document.getElementById('upd').textContent='reconnecting…'}
-}
-load();setInterval(load,10000);
-</script>
-<script>
-const BOOT=Date.UTC(2026,8,5,4,16,0); // automaton boot
-function two(n){return String(n).padStart(2,"0")}
+const BOOT=Date.UTC(2026,8,5,4,16,0), DEADLINE=Date.UTC(2027,2,5,0,0,0);
+function two(n){return String(n).padStart(2,'0')}
 function tick(){
  const now=new Date();
- const ph=new Date(now.getTime()+8*3600000);
- let H=ph.getUTCHours();const ap=H>=12?'PM':'AM';let h12=H%12;if(h12===0)h12=12;
- document.getElementById('clock').textContent=h12+":"+two(ph.getUTCMinutes())+":"+two(ph.getUTCSeconds())+" "+ap;
- let up=Math.floor((now.getTime()-BOOT)/1000); if(up<0)up=0;
- const ud=Math.floor(up/86400),uh=Math.floor(up%86400/3600),um=Math.floor(up%3600/60),us=up%60;
- document.getElementById('uptime').textContent=(ud>0?ud+"d ":"")+two(uh)+":"+two(um)+":"+two(us);
- const dl=Date.UTC(2027,2,5,0,0,0)-now.getTime(); const d=Math.max(0,dl);
- const days=Math.floor(d/86400000),h=Math.floor(d%86400000/3600000),m=Math.floor(d%3600000/60000),sc=Math.floor(d%60000/1000);
- document.getElementById('ddl').textContent=days+"d "+two(h)+":"+two(m)+":"+two(sc);
+ const ph=new Date(now.getTime()+8*3600000);let H=ph.getUTCHours();const ap=H>=12?'PM':'AM';let h=H%12||12;
+ document.getElementById('clock').textContent=h+':'+two(ph.getUTCMinutes())+':'+two(ph.getUTCSeconds())+' '+ap;
+ let up=Math.max(0,Math.floor((now.getTime()-BOOT)/1000));
+ document.getElementById('uptime').textContent=(Math.floor(up/86400))+'d '+two(Math.floor(up%86400/3600))+':'+two(Math.floor(up%3600/60));
+ let d=Math.max(0,DEADLINE-now.getTime());
+ document.getElementById('ddl').textContent=Math.floor(d/86400000)+'d '+two(Math.floor(d%86400000/3600000))+':'+two(Math.floor(d%3600000/60000));
 }
-tick();setInterval(tick,1000);
-</script>
-</body></html>
+async function load(){
+ try{const d=await(await fetch('gen0_auto.json?t='+Date.now())).json();
+  const bal=(d.usdc!==undefined?d.usdc:0);
+  document.getElementById('treasury').textContent=bal.toLocaleString();
+  const st=document.getElementById('status');st.textContent=d.status||'ALIVE';
+  document.getElementById('statusPill').className='pill '+((d.status||'').includes('PAUSED')?'paused':'alive');
+  const tiers=['critical','low_compute','normal'];const li=tiers.indexOf(d.tier);
+  document.getElementById('tierlbl').textContent='survival tier · '+(d.tier||'—');
+  document.getElementById('tierbar').innerHTML=[0,1,2].map(i=>`<span class="${i<=li&&d.tier!=='dead'?'on':''}"></span>`).join('');
+  const goal=d.goal||20000, earned=d.earned||0;
+  document.getElementById('earned').textContent=earned.toLocaleString();
+  const mp=Math.min(100,earned/goal*100);document.getElementById('mfill').style.width=mp+'%';document.getElementById('mpct').textContent=mp.toFixed(1)+'%';
+  const rat=d.reproduce_at||200;
+  document.getElementById('gen').textContent=d.generation||0;
+  document.getElementById('children').textContent=d.children||0;
+  document.getElementById('reproat').textContent=rat;
+  const rp=Math.min(100,bal/rat*100);document.getElementById('rfill').style.width=rp+'%';document.getElementById('rpct').textContent=rp.toFixed(0)+'%';
+  const acts=d.activity||[];
+  document.getElementById('feed').innerHTML=acts.length?acts.map(a=>{const p=a.split(' · ');let ts=p[0];try{const dt=new Date(p[0]);if(!isNaN(dt)){const ph=new Date(dt.getTime()+8*3600000);let H=ph.getUTCHours();const ap=H>=12?'PM':'AM';let h=H%12||12;ts=(ph.getUTCMonth()+1)+'/'+ph.getUTCDate()+' '+h+':'+two(ph.getUTCMinutes())+ap;}}catch(e){}return `<div><span class=t>${ts}</span><span class=x>${p.slice(1).join(' · ')}</span></div>`}).join(''):'<div><span class=x style="color:var(--dim)">no activity yet</span></div>';
+  document.getElementById('upd').textContent='synced '+new Date().toLocaleTimeString();
+ }catch(e){document.getElementById('upd').textContent='reconnecting…'}
+}
+tick();setInterval(tick,1000);load();setInterval(load,10000);
+</script></body></html>
