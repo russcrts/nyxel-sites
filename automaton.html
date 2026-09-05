@@ -104,7 +104,7 @@ function tick(){
  const sec=Math.floor(now.getTime()/1000);
  const rem=CYCLE-(sec%CYCLE);
  document.getElementById('nextcycle').textContent=two(Math.floor(rem/60))+":"+two(rem%60);
- const dl=Date.UTC(2026,2,5,0,0,0)-now.getTime(); const d=Math.max(0,dl);
+ const dl=Date.UTC(2027,2,5,0,0,0)-now.getTime(); const d=Math.max(0,dl);
  const days=Math.floor(d/86400000),h=Math.floor(d%86400000/3600000),m=Math.floor(d%3600000/60000),s=Math.floor(d%60000/1000);
  document.getElementById('ddl').textContent=days+"d "+two(h)+":"+two(m)+":"+two(s);
 }
