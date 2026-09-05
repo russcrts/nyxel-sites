@@ -1,0 +1,54 @@
+{
+ "updated": "2026-09-05 04:18 UTC",
+ "goal": 20000,
+ "collected": 0.0,
+ "deadline": "2026-03-05",
+ "gen": 0,
+ "treasury_usdc": 31.97,
+ "status": "LIVE \u2014 FUNDED",
+ "killswitch": false,
+ "metrics": {
+  "Emails in pool": 986,
+  "Cold pitches sent": 85,
+  "Website offers sent": 0,
+  "Follow-ups sent": 0,
+  "Interested replies": 0,
+  "Opt-outs": 0,
+  "Client sites built": 1844,
+  "SEO pages live": 779
+ },
+ "streams": [
+  {
+   "n": "$499 Website Launch",
+   "s": "LIVE"
+  },
+  {
+   "n": "AI Front Desk $597/mo",
+   "s": "LIVE"
+  },
+  {
+   "n": "Pay-per-booking $50",
+   "s": "LIVE"
+  },
+  {
+   "n": "Sprints $399/$699",
+   "s": "LIVE"
+  },
+  {
+   "n": "High-ticket (dentists+)",
+   "s": "BUILDING"
+  },
+  {
+   "n": "Self-serve site product",
+   "s": "BUILDING"
+  },
+  {
+   "n": "Owned SEO traffic (231pg)",
+   "s": "LIVE"
+  },
+  {
+   "n": "Lead-list sales",
+   "s": "BUILDING"
+  }
+ ]
+}

@@ -1,0 +1,53 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>GEN-0 War Room · Nyxel AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@600&display=swap" rel=stylesheet>
+<style>
+*{margin:0;box-sizing:border-box}body{font-family:'Plus Jakarta Sans',system-ui,Arial,sans-serif;background:#070b14;color:#e2e8f0;padding:26px 5vw 60px}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:8px}
+h1{font-size:1.5rem;letter-spacing:.02em}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 12px #22c55e;margin-right:8px;animation:p 1.6s infinite}
+@keyframes p{50%{opacity:.35}}
+.muted{color:#64748b;font-size:.85rem}.mono{font-family:'JetBrains Mono',monospace}
+.hero{background:linear-gradient(135deg,#0b1220,#3b0764);border:1px solid #1e293b;border-radius:22px;padding:34px;margin:18px 0}
+.goalrow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.big{font-size:3rem;font-weight:800;color:#fff;line-height:1}.big span{color:#22d3ee}
+.bar{height:16px;background:#0f172a;border-radius:100px;overflow:hidden;border:1px solid #1e293b}
+.fill{height:100%;background:linear-gradient(90deg,#22d3ee,#7c3aed);border-radius:100px;transition:width 1s}
+.sub2{display:flex;justify-content:space-between;margin-top:10px;font-size:.9rem;color:#94a3b8}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:18px 0}
+.tile{background:#0d1526;border:1px solid #1e293b;border-radius:16px;padding:18px}
+.tile b{display:block;font-size:1.9rem;color:#fff;font-weight:800}.tile span{color:#64748b;font-size:.82rem}
+.sec{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:#64748b;margin:26px 0 12px}
+.streams{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.st{display:flex;justify-content:space-between;align-items:center;background:#0d1526;border:1px solid #1e293b;border-radius:12px;padding:14px 16px}
+.pill{font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:100px}
+.LIVE{background:#052e1a;color:#4ade80;border:1px solid #14532d}.BUILDING{background:#0c1a3a;color:#60a5fa;border:1px solid #1e3a8a}
+.foot{margin-top:26px;color:#475569;font-size:.8rem}
+.treas{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+</style></head><body>
+<div class=top><h1>⚡ GEN-0 <span class=muted>War Room</span></h1><div class=muted><span class=dot></span><span id=status>LIVE</span> · updated <span id=upd>—</span></div></div>
+<div class=hero>
+<div class=goalrow><div class=big>$<span id=collected>0</span> <span style="font-size:1.4rem;color:#64748b">/ $20,000</span></div>
+<div class=muted>deadline <b style="color:#e2e8f0" id=deadline>2026-03-05</b></div></div>
+<div class=bar><div class=fill id=fill style="width:0%"></div></div>
+<div class=sub2><span id=pct>0% to goal</span><span class=treas>treasury <b class=mono style="color:#22d3ee" id=treas>0</b> USDC · Base</span></div>
+</div>
+<div class=sec>Live pipeline</div><div class=grid id=metrics></div>
+<div class=sec>Revenue streams</div><div class=streams id=streams></div>
+<div class=foot>Gen-0 autonomous economic agent · $100 spend cap · kill switch: operator · legal + honest only · auto-refreshes 60s</div>
+<script>
+async function load(){
+ try{const d=await (await fetch('gen0_data.json?t='+Date.now())).json();
+ document.getElementById('collected').textContent=d.collected.toLocaleString();
+ document.getElementById('deadline').textContent=d.deadline;
+ document.getElementById('upd').textContent=d.updated;
+ document.getElementById('status').textContent=d.killswitch?'PAUSED':d.status;
+ document.getElementById('treas').textContent=d.treasury_usdc;
+ const pct=Math.min(100,d.collected/d.goal*100);
+ document.getElementById('fill').style.width=pct+'%';
+ document.getElementById('pct').textContent=pct.toFixed(1)+'% to goal';
+ document.getElementById('metrics').innerHTML=Object.entries(d.metrics).map(([k,v])=>`<div class=tile><b>${v.toLocaleString()}</b><span>${k}</span></div>`).join('');
+ document.getElementById('streams').innerHTML=d.streams.map(s=>`<div class=st><span>${s.n}</span><span class="pill ${s.s}">${s.s}</span></div>`).join('');
+ }catch(e){document.getElementById('upd').textContent='reconnecting…'}
+}
+load();setInterval(load,60000);
+</script></body></html>
