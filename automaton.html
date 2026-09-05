@@ -61,6 +61,10 @@ h1{font-size:1.7rem;letter-spacing:.06em;font-weight:700}h1 b{color:#22d3ee}
  <div class=k>Constitution · immutable</div>
  <ul class=laws id=laws></ul>
 </div>
+<div class=card style="margin-top:18px">
+ <div class=k>Live activity · Think → Act → Observe</div>
+ <div id=activity style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.9"></div>
+</div>
 <div class=foot>Runs continuously on a DigitalOcean droplet · max loss = wallet (~$32, no credit) · operator kill switch · updated <span id=upd>—</span> · auto-refresh 60s</div>
 <script>
 async function load(){
@@ -81,6 +85,7 @@ async function load(){
   document.getElementById('deadline').textContent='by '+d.mandate.split('by ')[1]+' · earn or die';
   document.getElementById('laws').innerHTML=d.laws.map(l=>{const p=l.split('—');return `<li><b>${p[0]}</b>${p[1]?'— '+p[1]:''}</li>`}).join('');
   document.getElementById('upd').textContent=d.updated;
+  document.getElementById('activity').innerHTML=(d.activity||[]).map(a=>{const p=a.split(' · ');return `<div style="padding:5px 0;border-bottom:1px solid #101827"><span style="color:#5b6b85">${p[0]}</span> &nbsp;<span style="color:#c9d4e5">${p.slice(1).join(' · ')}</span></div>`}).join('')||'<span style="color:#5b6b85">no activity yet</span>';
  }catch(e){document.getElementById('upd').textContent='reconnecting…'}
 }
 load();setInterval(load,60000);
