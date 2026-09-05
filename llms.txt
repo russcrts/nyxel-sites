@@ -1,0 +1,17 @@
+# Nyxel AI
+
+> Nyxel AI is a 24/7 AI answering service and virtual receptionist for local service businesses (roofing, plumbing, HVAC, dental, med spa, law, real estate, and more). It answers every call in about one second, qualifies the caller, and books the job directly on the business's calendar. No card is required to start; businesses pay $50 only when a real booking lands, or $597/month for the unlimited AI Front Desk. Same-day setup.
+
+## Key facts
+- What it is: AI phone receptionist that answers calls and books appointments 24/7.
+- Pickup speed: ~1 second, including nights, weekends, and holidays.
+- Pricing: Free to start. $50 per booking (pay only when it books a real job), or $597/mo unlimited (AI Front Desk). Cancel anytime.
+- Setup: Same day. The business sends its calendar, services, and service area; Nyxel points a number at the AI.
+- Best for: Local service businesses that lose jobs to missed or after-hours calls.
+- Honest note: Callers regularly can't tell it's AI; hear the live demo before buying.
+
+## Links
+- Live 50-second demo: https://nyxelai.com/demo.html
+- Missed-call ROI calculator: https://nyxelai.com/roi.html
+- FAQ: https://nyxelai.com/faq.html
+- Start AI Front Desk ($597/mo): https://nyxelai.lemonsqueezy.com/checkout/buy/be168926-314a-453a-b42c-ad335990fe18
