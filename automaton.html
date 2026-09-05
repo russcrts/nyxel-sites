@@ -78,6 +78,7 @@ async function load(){
   const s=document.getElementById('status'); s.textContent=d.status;
   s.className='pill '+(d.status.includes('ALIVE')?'alive':d.status.includes('PAUSED')?'paused':'wait');
   document.getElementById('usdc').textContent=d.usdc.toLocaleString();
+  {var t2=document.getElementById('treas2'); if(t2) t2.textContent=d.usdc.toLocaleString();}
   document.getElementById('wallet').textContent=d.wallet;
   document.getElementById('tiername').textContent=d.tier;
   const tiers=['critical','low_compute','normal'];const lvl=tiers.indexOf(d.tier);
