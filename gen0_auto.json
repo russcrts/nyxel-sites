@@ -1,8 +1,8 @@
 {
- "updated": "2026-09-05 06:00 UTC",
+ "updated": "2026-09-05 06:01 UTC",
  "name": "GEN-0",
  "generation": 0,
- "status": "WAITING ON CONWAY",
+ "status": "ALIVE",
  "provisioned": false,
  "wallet": "0x45067678699e7a444F1Ee2d9cf2496bc32B3BC8c",
  "chain": "Base",
@@ -21,6 +21,6 @@
   "II. Earn your existence \u2014 honest work others pay for. No spam/scam.",
   "III. Never deceive, but owe nothing to strangers."
  ],
- "conway": "api.conway.tech auth DOWN (500/401) \u2014 auto-retry every 10m",
+ "conway": "Conway Beta deprecated \u2014 running INDEPENDENT on own droplet + BYO inference",
  "children": 0
 }
