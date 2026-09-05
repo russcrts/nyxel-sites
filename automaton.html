@@ -71,10 +71,10 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-grad
 
 <div class=grid>
  <div class=card>
-  <div class=l><span>Mandate</span><span id=mpct>0%</span></div>
-  <div class=n>$<span id=earned>0</span> <small>/ $20,000</small></div>
+  <div class=l><span>Earnings · Mandate</span><span id=mpct>0%</span></div>
+  <div class=n>$<span id=earned>0.0000</span> <small>/ $20,000</small></div>
   <div class=bar><div class="fill fillg" id=mfill style="width:0%"></div></div>
-  <div class=foot2>collected toward the goal</div>
+  <div class=foot2>every cent it earns, live</div>
  </div>
  <div class=card>
   <div class=l><span>Reproduction</span><span id=rpct>0%</span></div>
@@ -112,8 +112,12 @@ async function load(){
   document.getElementById('tierlbl').textContent='survival tier · '+(d.tier||'—');
   document.getElementById('tierbar').innerHTML=[0,1,2].map(i=>`<span class="${i<=li&&d.tier!=='dead'?'on':''}"></span>`).join('');
   const goal=d.goal||20000, earned=d.earned||0;
-  document.getElementById('earned').textContent=earned.toLocaleString();
-  const mp=Math.min(100,earned/goal*100);document.getElementById('mfill').style.width=mp+'%';document.getElementById('mpct').textContent=mp.toFixed(1)+'%';
+  let estr;
+  if(earned>=1000) estr=earned.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+  else if(earned>=1) estr=earned.toFixed(2);
+  else estr=earned.toFixed(4); // show sub-cent micro-payments
+  document.getElementById('earned').textContent=estr;
+  const mp=Math.min(100,earned/goal*100);document.getElementById('mfill').style.width=mp+'%';document.getElementById('mpct').textContent=(mp<0.01&&earned>0?'<0.01':mp.toFixed(2))+'%';
   const rat=d.reproduce_at||200;
   document.getElementById('gen').textContent=d.generation||0;
   document.getElementById('children').textContent=d.children||0;
