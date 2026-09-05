@@ -66,6 +66,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-grad
  <div class=big>$<span id=treasury>0</span></div>
  <div class=sub id=tierlbl>survival tier · —</div>
  <div class=tier id=tierbar></div>
+ <div class=sub style="margin-top:12px">⛽ Gas: <b id=eth style="color:#a5b4fc">0</b> ETH on Base</div>
  <div class=addr>0x45067678699e7a444F1Ee2d9cf2496bc32B3BC8c</div>
 </div>
 
@@ -106,6 +107,7 @@ async function load(){
  try{const d=await(await fetch('gen0_auto.json?t='+Date.now())).json();
   const bal=(d.usdc!==undefined?d.usdc:0);
   document.getElementById('treasury').textContent=bal.toLocaleString();
+  if(d.eth!==undefined) document.getElementById('eth').textContent=(+d.eth).toFixed(6);
   const st=document.getElementById('status');st.textContent=d.status||'ALIVE';
   document.getElementById('statusPill').className='pill '+((d.status||'').includes('PAUSED')?'paused':'alive');
   const tiers=['critical','low_compute','normal'];const li=tiers.indexOf(d.tier);
