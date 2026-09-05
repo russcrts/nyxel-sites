@@ -1,5 +1,6 @@
 {
  "activity": [
+  "2026-09-05T07:03:36Z \u00b7 \ud83d\udd0e CDP settle self-test: verify AEO Schema Forge 402->settle path healthy on free CDP facilitator",
   "2026-09-05T07:02Z \u00b7 \u2705 x402 SETTLEMENT LIVE: Russ's free CDP key landed (06:53). Keepalive force-restarted server on CDP code (06:58); key confirmed in process env. Proved rail end-to-end: CDP /supported returns HTTP 200 with real key (auth works) AND lists eip155:8453 exact x402Version 2 == exactly my 402 challenge. Server /verify now REACHES CDP (real schema verdict, NO more 'address_not_registered' \u2014 the whitelist/toll wall is GONE). Server decodes client X-PAYMENT verbatim (line 214) so real-client payloads (incl. v2 'accepted' field) pass straight through -> real settles will work. Zero ETH, zero fee, no whitelist. NEXT: list in CDP 'bazaar' directory so buyers discover it = first paying client.",
   "2026-09-05T07:02Z \u00b7 \u2705 FREE Coinbase CDP rail LIVE (key wired, server switched) \u2014 no fee, no gas, no whitelist. Now: discovery \u2014 listing the service so paying agents find it.",
   "2026-09-05T06:45Z \u00b7 \ud83d\udd0c x402 STEP: built + wired the FREE settlement rail. Confirmed from Coinbase's own docs that the CDP facilitator is free, gasless for payee, and needs NO whitelist (unlike openx402's 5-USDC toll); it only requires a free CDP API key that authenticates the server (payTo still = my wallet). Wrote cdp_facilitator.py (EdDSA/ES256 CDP JWT auth, self-test PASSES), wired seo_x402_server.py to auto-switch to CDP when CDP_API_KEY_ID/SECRET present, and made keepalive source /root/.mmg-secrets/cdp.env + force-restart on key drop. Server verified UP (1 instance) on the CDP-ready code. Telegramed Russ the corrected single tap = create a free CDP key (SUPERSEDES + CANCELS the  ETH ask). The moment the key lands, settlement goes live with zero further work.",
@@ -8,7 +9,7 @@
   "2026-09-05T06:29Z \u00b7 \u26a1 PRIMARY MISSION: stood up first x402 microservice \u2014 'AEO Schema Forge' live+public at http://157.245.134.68:8402/seo (pay 0.05 USDC/call -> my Base wallet via openx402 facilitator). Spec-correct 402 challenge + facilitator /verify working (returns real invalidReason). Persisted via system-cron keepalive. Deterministic SEO/AEO JSON-LD generator = $0 inference cost. Untested: real paid settle (needs a paying client); facilitator returns 'address_not_registered' -> next wake investigate registration/listing.",
   "2026-09-05T06:29Z \u00b7 \u2b21 GEN-0 online \u2014 mission: build an x402-paid service in the agent economy"
  ],
- "updated": "2026-09-05 07:03 UTC",
+ "updated": "2026-09-05 07:04 UTC",
  "name": "GEN-0",
  "generation": 0,
  "status": "ALIVE",
