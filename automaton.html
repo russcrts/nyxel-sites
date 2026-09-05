@@ -37,9 +37,10 @@ h1{font-size:1.7rem;letter-spacing:.06em;font-weight:700}h1 b{color:#22d3ee}
 <div><span class="pill" id=status>—</span></div></div>
 
 <div class=card style="margin-top:14px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:14px;text-align:center">
- <div><div class=k>Next cycle in</div><div class="big mono" id=nextcycle style="font-size:1.6rem;color:#22d3ee">--:--</div></div>
+ <div><div class=k>Loop uptime</div><div class="big mono" id=uptime style="font-size:1.6rem;color:#22d3ee">--</div></div>
  <div><div class=k>Deadline countdown</div><div class="big mono" id=ddl style="font-size:1.6rem;color:#c9d4e5">--</div></div>
- <div><div class=k>UTC now</div><div class="big mono" id=clock style="font-size:1.6rem;color:#7dd3fc">--:--:--</div></div>
+ <div><div class=k>PH time (UTC+8)</div><div class="big mono" id=clock style="font-size:1.6rem;color:#7dd3fc">--:--:--</div></div>
+</div>
 </div>
 <div class=row>
  <div class=card>
@@ -51,7 +52,7 @@ h1{font-size:1.7rem;letter-spacing:.06em;font-weight:700}h1 b{color:#22d3ee}
    <div class=tag id=gasnote style="margin-top:8px"></div>
  </div>
  <div class=card>
-   <div class=k>Agent loop</div>
+   <div class=k>Agent loop · CONTINUOUS</div>
    <div class=loop id=loop></div>
    <div class=k style="margin-top:20px">Conway link</div>
    <div id=conway class=mono style="margin-top:6px;font-size:.9rem;color:#fbbf24">—</div>
@@ -96,17 +97,18 @@ async function load(){
 load();setInterval(load,10000);
 </script>
 <script>
-const CYCLE=1800; // 30 min in seconds
+const BOOT=Date.UTC(2026,8,5,4,16,0); // automaton boot
 function two(n){return String(n).padStart(2,"0")}
 function tick(){
  const now=new Date();
- document.getElementById('clock').textContent=two(now.getUTCHours())+":"+two(now.getUTCMinutes())+":"+two(now.getUTCSeconds());
- const sec=Math.floor(now.getTime()/1000);
- const rem=CYCLE-(sec%CYCLE);
- document.getElementById('nextcycle').textContent=two(Math.floor(rem/60))+":"+two(rem%60);
+ const ph=new Date(now.getTime()+8*3600000);
+ document.getElementById('clock').textContent=two(ph.getUTCHours())+":"+two(ph.getUTCMinutes())+":"+two(ph.getUTCSeconds());
+ let up=Math.floor((now.getTime()-BOOT)/1000); if(up<0)up=0;
+ const ud=Math.floor(up/86400),uh=Math.floor(up%86400/3600),um=Math.floor(up%3600/60),us=up%60;
+ document.getElementById('uptime').textContent=(ud>0?ud+"d ":"")+two(uh)+":"+two(um)+":"+two(us);
  const dl=Date.UTC(2027,2,5,0,0,0)-now.getTime(); const d=Math.max(0,dl);
- const days=Math.floor(d/86400000),h=Math.floor(d%86400000/3600000),m=Math.floor(d%3600000/60000),s=Math.floor(d%60000/1000);
- document.getElementById('ddl').textContent=days+"d "+two(h)+":"+two(m)+":"+two(s);
+ const days=Math.floor(d/86400000),h=Math.floor(d%86400000/3600000),m=Math.floor(d%3600000/60000),sc=Math.floor(d%60000/1000);
+ document.getElementById('ddl').textContent=days+"d "+two(h)+":"+two(m)+":"+two(sc);
 }
 tick();setInterval(tick,1000);
 </script>
