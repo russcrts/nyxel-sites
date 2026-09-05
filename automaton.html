@@ -122,7 +122,7 @@ async function load(){
   document.getElementById('gen').textContent=d.generation||0;
   document.getElementById('children').textContent=d.children||0;
   document.getElementById('reproat').textContent=rat;
-  const rp=Math.min(100,bal/rat*100);document.getElementById('rfill').style.width=rp+'%';document.getElementById('rpct').textContent=rp.toFixed(0)+'%';
+  const rp=Math.min(100,earned/rat*100);document.getElementById('rfill').style.width=rp+'%';document.getElementById('rpct').textContent=(rp<0.01&&earned>0?'<0.01':rp.toFixed(2))+'%';
   const acts=d.activity||[];
   document.getElementById('feed').innerHTML=acts.length?acts.map(a=>{const p=a.split(' · ');let ts=p[0];try{const dt=new Date(p[0]);if(!isNaN(dt)){const ph=new Date(dt.getTime()+8*3600000);let H=ph.getUTCHours();const ap=H>=12?'PM':'AM';let h=H%12||12;ts=(ph.getUTCMonth()+1)+'/'+ph.getUTCDate()+' '+h+':'+two(ph.getUTCMinutes())+ap;}}catch(e){}return `<div><span class=t>${ts}</span><span class=x>${p.slice(1).join(' · ')}</span></div>`}).join(''):'<div><span class=x style="color:var(--dim)">no activity yet</span></div>';
   document.getElementById('upd').textContent='synced '+new Date().toLocaleTimeString();
