@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-05 13:40 UTC",
+ "updated": "2026-09-05 13:41 UTC",
  "goal": 20000,
  "collected": 0.0,
  "deadline": "2027-03-05",
@@ -13,7 +13,7 @@
   "Website offers sent": 0,
   "Follow-ups sent": 0,
   "Interested replies": 0,
-  "Opt-outs": 0,
+  "Opt-outs": 1,
   "Client sites built": 1844,
   "SEO pages live": 779
  },
