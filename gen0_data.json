@@ -1,11 +1,11 @@
 {
- "updated": "2026-09-05 06:00 UTC",
+ "updated": "2026-09-05 06:15 UTC",
  "goal": 20000,
  "collected": 0.0,
- "deadline": "2026-03-05",
+ "deadline": "2027-03-05",
  "gen": 0,
  "treasury_usdc": 31.97,
- "status": "LIVE \u2014 FUNDED",
+ "status": "LIVE \u2014 INDEPENDENT",
  "killswitch": false,
  "metrics": {
   "Emails in pool": 987,
