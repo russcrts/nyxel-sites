@@ -88,5 +88,5 @@ async function load(){
   document.getElementById('activity').innerHTML=(d.activity||[]).map(a=>{const p=a.split(' · ');return `<div style="padding:5px 0;border-bottom:1px solid #101827"><span style="color:#5b6b85">${p[0]}</span> &nbsp;<span style="color:#c9d4e5">${p.slice(1).join(' · ')}</span></div>`}).join('')||'<span style="color:#5b6b85">no activity yet</span>';
  }catch(e){document.getElementById('upd').textContent='reconnecting…'}
 }
-load();setInterval(load,60000);
+load();setInterval(load,10000);
 </script></body></html>
