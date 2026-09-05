@@ -91,7 +91,7 @@ async function load(){
   document.getElementById('deadline').textContent='by '+d.mandate.split('by ')[1]+' · earn or die';
   document.getElementById('laws').innerHTML=d.laws.map(l=>{const p=l.split('—');return `<li><b>${p[0]}</b>${p[1]?'— '+p[1]:''}</li>`}).join('');
   document.getElementById('upd').textContent=d.updated;
-  document.getElementById('activity').innerHTML=(d.activity||[]).map(a=>{const p=a.split(' · ');return `<div style="padding:5px 0;border-bottom:1px solid #101827"><span style="color:#5b6b85">${p[0]}</span> &nbsp;<span style="color:#c9d4e5">${p.slice(1).join(' · ')}</span></div>`}).join('')||'<span style="color:#5b6b85">no activity yet</span>';
+  document.getElementById('activity').innerHTML=(d.activity||[]).map(a=>{const p=a.split(' \u00b7 ');let ts=p[0];try{const dt=new Date(p[0]);if(!isNaN(dt)){const ph=new Date(dt.getTime()+8*3600000);let H=ph.getUTCHours();const ap=H>=12?'PM':'AM';let h=H%12;if(h===0)h=12;const mm=String(ph.getUTCMinutes()).padStart(2,'0');const mo=ph.getUTCMonth()+1,da=ph.getUTCDate();ts=mo+'/'+da+' '+h+':'+mm+' '+ap;}}catch(e){}return `<div style="padding:5px 0;border-bottom:1px solid #101827"><span style="color:#5b6b85">${ts}</span> &nbsp;<span style="color:#c9d4e5">${p.slice(1).join(' \u00b7 ')}</span></div>`}).join('')||'<span style="color:#5b6b85">no activity yet</span>';
  }catch(e){document.getElementById('upd').textContent='reconnecting…'}
 }
 load();setInterval(load,10000);
