@@ -102,7 +102,8 @@ function two(n){return String(n).padStart(2,"0")}
 function tick(){
  const now=new Date();
  const ph=new Date(now.getTime()+8*3600000);
- document.getElementById('clock').textContent=two(ph.getUTCHours())+":"+two(ph.getUTCMinutes())+":"+two(ph.getUTCSeconds());
+ let H=ph.getUTCHours();const ap=H>=12?'PM':'AM';let h12=H%12;if(h12===0)h12=12;
+ document.getElementById('clock').textContent=h12+":"+two(ph.getUTCMinutes())+":"+two(ph.getUTCSeconds())+" "+ap;
  let up=Math.floor((now.getTime()-BOOT)/1000); if(up<0)up=0;
  const ud=Math.floor(up/86400),uh=Math.floor(up%86400/3600),um=Math.floor(up%3600/60),us=up%60;
  document.getElementById('uptime').textContent=(ud>0?ud+"d ":"")+two(uh)+":"+two(um)+":"+two(us);
